@@ -17,12 +17,19 @@ project:
       affiliations:
         - University of Wisconsin–Madison
       corresponding: true
+      roles:
+        - conceptualisation
+        - writing
     - name: Ruben Arts
       affiliations:
         - Prefix.dev
+      roles:
+        - software
     - name: John Kirkham
       affiliations:
         - NVIDIA
+      roles:
+        - software
   keywords:
     - reproducible
     - machine learning
@@ -33,6 +40,12 @@ project:
   # Add the abbreviations that you use in your paper here
   abbreviations:
     CUDA: Compute Unified Device Architecture
+  # It is possible to explicitly ignore the `doi-exists` check for certain citation keys
+  error_rules:
+    - rule: doi-exists
+      severity: ignore
+      keys:
+        - pixi
   exports:
     - id: pdf
       format: typst
