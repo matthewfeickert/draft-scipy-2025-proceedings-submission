@@ -1,0 +1,41 @@
+version: 1
+extends: ../papers.yml
+project:
+  # Update this to match `scipy-2025-<folder>` the folder should be `<firstname_surname>`
+  id: scipy-2025-matthew_feickert
+  # Ensure your title is the same as in your `main.md`
+  title: Reproducible Machine Learning Workflows for Scientists with Pixi
+  # subtitle:
+  description: |
+    Scientific researchers need reproducible software environments for complex applications that can run across heterogeneous computing platforms.
+    Modern open source tools, like Pixi and the CUDA conda-forge packages, provide reproducibility solutions for while providing high level semantics well suited for researchers.
+  # Authors should have affiliations, emails and ORCIDs if available
+  authors:
+    - name: Matthew Feickert
+      email: matthew.feickert@cern.ch
+      orcid: 0000-0003-4124-7862
+      affiliations:
+        - University of Wisconsin&ndash;Madison
+      corresponding: true
+    - name: Ruben Arts
+      affiliations:
+        - Prefix.dev
+    - name: John Kirkham
+      affiliations:
+        - NVIDIA
+  keywords:
+    - reproducible
+    - machine learning
+    - hardware acceleration
+    - CUDA
+    - conda-forge
+    - Pixi
+  # Add the abbreviations that you use in your paper here
+  abbreviations:
+    CUDA: Compute Unified Device Architecture
+  exports:
+    - id: pdf
+      format: typst
+      template: https://github.com/curvenote-templates/scipy.git
+      article: main.md
+      output: full_text.pdf
