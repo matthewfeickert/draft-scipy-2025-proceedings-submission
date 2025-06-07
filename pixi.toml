@@ -6,14 +6,17 @@ platforms = ["linux-64", "osx-arm64"]
 version = "0.1.0"
 
 [tasks.serve]
+description = "Start the current project as a website"
 cwd = "paper"
 cmd = "myst start"
 
 [tasks.build-ci]
+description = "Build static HTML site content in automated CI"
 cwd = "paper"
 cmd = "myst build --html --ci"
 
 [tasks.start]
+description = "Build and serve the paper"
 depends-on = ["serve"]
 
 [dependencies]
