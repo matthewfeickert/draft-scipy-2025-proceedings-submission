@@ -20,13 +20,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: prefix-dev/setup-pixi@v0.8.0
+      - uses: prefix-dev/setup-pixi@v0.8.8
         with:
           cache: true
           cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
 
       - name: Build HTML Assets
-        run: pixi run 'cd paper && myst build --html --ci'
+        run: pixi run build-ci
 
       - name: list files
         run: ls -l paper/_build/html
