@@ -10,7 +10,7 @@ abstract: |
 :::{include} introduction.md
 :::
 
-:::{include} conda-forge.md
+:::{include} conda-packages.md
 :::
 
 :::{include} cuda.md
