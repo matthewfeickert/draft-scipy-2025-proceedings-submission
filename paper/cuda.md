@@ -20,10 +20,10 @@ In 2019, NVIDIA began packaging the `cudatoolkit` package in the [`nvidia` conda
 With help from the broader community, the `cudatoolkit` package was added to `conda-forge` in 2020 [@staged-recipes-pr-12882].
 For the first time, this provided users the _ability to specify different versions of CUDA libraries_ and download them in newly created Conda environments.
 
-Supporting initial conda-forge CUDA builds required additional components.
-* First, [a conda-forge Docker image](https://github.com/conda-forge/docker-images/pull/93) using [the NVIDIA CUDA Docker images](https://hub.docker.com/r/nvidia/cuda/), which provided the NVIDIA build tools for compiling packages.
-* Second, [a shim package](https://github.com/conda-forge/staged-recipes/pull/8229) to leverage the NVIDIA build tools within a Conda package build.
-* Third, [a CUDA build matrix in conda-forge's global pinnings](https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/285), which tied these two pieces together.
+Supporting initial conda-forge CUDA builds required additional components:
+* [A conda-forge Docker image](https://github.com/conda-forge/docker-images/pull/93) using [the NVIDIA CUDA Docker images](https://hub.docker.com/r/nvidia/cuda/), which provided the NVIDIA build tools for compiling packages.
+* [A shim package](https://github.com/conda-forge/staged-recipes/pull/8229) to leverage the NVIDIA build tools within a Conda package build.
+* [A CUDA build matrix in conda-forge's global pinnings](https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/285), which tied these two pieces together.
 
 These ideas were tied together in [the first package build on September 20, 2019](https://github.com/conda-forge/ucx-split-feedstock/pull/14), and the initial implementation of this work was completed later in 2019. In 2020, support was expanded to [Windows CUDA builds](https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/914).
 Lots of iteration on this work happened after, all using the same basic foundation.
