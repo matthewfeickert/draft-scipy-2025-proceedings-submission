@@ -7,4 +7,8 @@ Package contents are also simple; they can only contain files and symbolic links
 
 ### conda-forge
 
-Technical overview of conda-forge and conda packages.
+Conda packages can be distributed on package indexes that support the concept of "channels" which redirect URLs to directory trees of conda packages.
+Channel names serve as the base path for hosting packages.
+The most broadly used community channel for conda-packages is the `conda-forge` channel, which hosts the conda packages generated from builds on the global conda-forge community cyberinfrastructure.
+The conda-forge community operates in a GitHub organization that hosts Git repositions that contain conda package build recipes as well as automation infrastructure and continuous integration (CI) and continuous delivery (CD) workflows.
+This allows for conda-forge community members to submit and maintain recipes &mdash; instructions for conda package build systems &mdash; to build and distribute conda packages for multiple variants of computing platforms &mdash; combinations of operating systems and hardware architectures &mdash; for Linux, macOS, and Windows.
