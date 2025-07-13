@@ -15,10 +15,10 @@ CUDA software environments were bespoke and not many scientists understood how t
 ### Initial implementation
 
 After discussion in late 2018 [@conda-forge_github_io_issue_687] to better support the scientific developer community, the CUDA packaging community agreed to use the Anaconda `defaults` channel's [@anaconda-defaults-channel] `cudatoolkit` package.
-Initially the `cudatoolkit` package was designed around [Numba's CUDA needs](https://github.com/numba/conda-recipe-cudatoolkit), though it evolved to a bundle of redistributable CUDA libraries.
+Initially the `cudatoolkit` package was designed around Numba's CUDA needs [@conda-recipe-cudatoolkit], though it evolved to a bundle of redistributable CUDA libraries.
 In 2019, NVIDIA began packaging the `cudatoolkit` package in the [`nvidia` conda channel](https://anaconda.org/nvidia).
-With help from the broader community, the `cudatoolkit` package was added to [`conda-forge` in 2020](https://github.com/conda-forge/staged-recipes/pull/12882).
-For the first time, this provided users the **ability to specify different versions of CUDA libraries** and download them in newly created Conda environments.
+With help from the broader community, the `cudatoolkit` package was added to `conda-forge` in 2020 [@staged-recipes-pr-12882].
+For the first time, this provided users the _ability to specify different versions of CUDA libraries_ and download them in newly created Conda environments.
 
 Supporting initial conda-forge CUDA builds required additional components.
 * First, [a conda-forge Docker image](https://github.com/conda-forge/docker-images/pull/93) using [the NVIDIA CUDA Docker images](https://hub.docker.com/r/nvidia/cuda/), which provided the NVIDIA build tools for compiling packages.
