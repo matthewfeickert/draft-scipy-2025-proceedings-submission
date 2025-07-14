@@ -26,3 +26,12 @@ This means that the first time a package is installed on a machine with Pixi is 
 
 Pixi users declaratively specify their project dependencies which are recorded in a Pixi manifest `pixi.toml` file (which for Python projects can optionally be embedded in a `pyproject.toml` `[pixi]` table) and automatically resolved in the `pixi.lock` lock file.
 This declarative nature allows for users to efficiently specify their project requirements while being guaranteed a static and reproducible environment from the lock file.
+
+### CUDA hardware accelerated environment creation
+
+Combining the features of modern CUDA `12` conda packages with Pixi's environment management, it is now possible to efficiently manage multiple software environments that can include both hardware accelerated and CPU environments.
+An example Pixi workspace is presented below
+
+```{literalinclude} code/ml-example/pixi.toml
+:linenos:
+```
