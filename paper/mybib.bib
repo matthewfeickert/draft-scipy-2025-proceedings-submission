@@ -5,7 +5,7 @@ title = {{pixi}},
 url = {https://github.com/prefix-dev/pixi/releases/tag/v0.48.0}
 }
 
-@misc{CUDA_paper,
+@misc{CUDA_slides,
   author={Fatica, Massimiliano},
   booktitle={2008 IEEE Hot Chips 20 Symposium (HCS)},
   title={CUDA toolkit and libraries},
@@ -13,7 +13,30 @@ url = {https://github.com/prefix-dev/pixi/releases/tag/v0.48.0}
   pages={1-22},
   doi={10.1109/HOTCHIPS.2008.7476520},
   url={https://doi.org/10.1109/HOTCHIPS.2008.7476520},
-  }
+}
+
+@inproceedings{CUDA_paper,
+author = {Nickolls, John and Buck, Ian and Garland, Michael and Skadron, Kevin},
+title = {Scalable parallel programming with CUDA},
+year = {2008},
+isbn = {9781450378451},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1401132.1401152},
+doi = {10.1145/1401132.1401152},
+abstract = {Is CUDA the parallel programming model that application developers have been waiting for?},
+booktitle = {ACM SIGGRAPH 2008 Classes},
+articleno = {16},
+numpages = {14},
+location = {Los Angeles, California},
+series = {SIGGRAPH '08}
+}
+
+# CUDA install guide
+@misc{CUDA_install_guide,
+  title = "{CUDA Installation Guide for Linux}",
+  howpublished = "\url{https://docs.nvidia.com/cuda/cuda-installation-guide-linux/}",
+}
 
 # PyPI
 @misc{PyPI_website,
@@ -36,5 +59,39 @@ year = {2015}
 author = {Feickert, Matthew},
 license = {CC-BY-4.0},
 title = {{Reproducible Machine Learning Workflows for Scientists}},
-url = "https://github.com/carpentries-incubator/reproducible-ml-workflows"
+url = "https://github.com/carpentries-incubator/reproducible-ml-workflows",
+year = {2025}
+}
+
+@misc{conda-forge_github_io_issue_687,
+  title = "{conda-forge.github.io Issue 687: How to specify CUDA version in a conda package?}",
+  howpublished = "\url{https://github.com/conda-forge/conda-forge.github.io/issues/687}",
+  year = {2018}
+}
+
+@misc{anaconda-defaults-channel,
+  title = "{Anaconda Documentation: Default channels}",
+  author = {{Anaconda, Inc.}},
+  howpublished = "\url{(https://www.anaconda.com/docs/tools/working-with-conda/reference/default-channels}",
+  year = {2025}
+}
+
+@software{conda-recipe-cudatoolkit,
+author = {{Continuum Analytics, Inc.}},
+license = {BSD-2-Clause},
+title = {{numba/conda-recipe-cudatoolkit}},
+url = "https://github.com/numba/conda-recipe-cudatoolkit",
+year = {2017}
+}
+
+@misc{staged-recipes-pr-12882,
+  title = "{conda-forge/staged-recipes Pull Request 12882: Cudatoolkit}",
+  howpublished = "\url{https://github.com/conda-forge/staged-recipes/pull/12882}",
+  year = {2020}
+}
+
+@misc{ucx-split-feedstock-pr-14,
+  title = "{conda-forge/ucx-split-feedstock Pull Request 14: Add GPU builds}",
+  howpublished = "\url{https://github.com/conda-forge/ucx-split-feedstock/pull/14}",
+  year = {2019}
 }
