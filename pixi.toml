@@ -19,6 +19,11 @@ cmd = "myst build --html --ci"
 description = "Build and serve the paper"
 depends-on = ["serve"]
 
+[tasks.clean]
+description = "Clean the build directories"
+cwd = "paper"
+cmd = "myst clean"
+
 [dependencies]
 mystmd = ">=1.5.1,<2"
 typst = ">=0.13.1,<0.14"
