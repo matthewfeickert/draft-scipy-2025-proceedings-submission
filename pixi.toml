@@ -20,5 +20,5 @@ description = "Build and serve the paper"
 depends-on = ["serve"]
 
 [dependencies]
-mystmd = ">=1.3.28,<2"
+mystmd = ">=1.5.1,<2"
 typst = ">=0.13.1,<0.14"
