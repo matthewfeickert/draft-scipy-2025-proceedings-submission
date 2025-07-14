@@ -18,11 +18,11 @@ After discussion in late 2018 [@conda-forge_github_io_issue_687] to better suppo
 Initially the `cudatoolkit` package was designed around Numba's CUDA needs [@conda-recipe-cudatoolkit], though it evolved to a bundle of redistributable CUDA libraries.
 In 2019, NVIDIA began packaging the `cudatoolkit` package in the [`nvidia` conda channel](https://anaconda.org/nvidia).
 With help from the broader community, the `cudatoolkit` package was added to `conda-forge` in 2020 [@staged-recipes-pr-12882].
-For the first time, this provided users the _ability to specify different versions of CUDA libraries_ and download them in newly created Conda environments.
+For the first time, this provided users the _ability to specify different versions of CUDA libraries_ and download them in newly created conda environments.
 
 Supporting initial conda-forge CUDA builds required additional components:
 * [A conda-forge Docker image](https://github.com/conda-forge/docker-images/pull/93) using [the NVIDIA CUDA Docker images](https://hub.docker.com/r/nvidia/cuda/), which provided the NVIDIA build tools for compiling packages.
-* [A shim package](https://github.com/conda-forge/staged-recipes/pull/8229) to leverage the NVIDIA build tools within a Conda package build.
+* [A shim package](https://github.com/conda-forge/staged-recipes/pull/8229) to leverage the NVIDIA build tools within a conda package build.
 * [A CUDA build matrix in conda-forge's global pinnings](https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/285), which tied these two pieces together.
 
 These ideas were tied together in the first package build on September 20, 2019 [@ucx-split-feedstock-pr-14], and the initial implementation of this work was completed later in 2019.
@@ -40,9 +40,9 @@ Third, the infrastructure management overhead of custom Docker images and their 
 Being able to install and use the build tools directly would simplify maintenance and benefit end-users wishing to use these build tools.
 
 To address these issues, NVIDIA began working on a revised set of packages.
-These more closely matched packages in other distribution channels (like Linux distribution package managers) and were adapted to the Conda user experience.
-For example, Linux distributions often install packages at the system level, which differs from the first-class userspace environment experience that Conda provides.
-As a result, some distinctions that a Linux distribution provides are unneeded in Conda.
+These more closely matched packages in other distribution channels (like Linux distribution package managers) and were adapted to the conda user experience.
+For example, Linux distributions often install packages at the system level, which differs from the first-class userspace environment experience that conda package environments provides.
+As a result, some distinctions that a Linux distribution provides are unneeded in conda.
 There are additional differences around behavior in pinning versions of dependencies or how compilers are packaged and expected to work in their installed environments.
 Initial production of the packages were made on the `nvidia` channel, however, all of this work was being done internally in NVIDIA and published to a separate channel.
 This made the packages less visible and required additional knowledge to use.
