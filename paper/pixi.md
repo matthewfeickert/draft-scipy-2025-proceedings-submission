@@ -35,3 +35,18 @@ An example Pixi workspace is presented below
 ```{literalinclude} code/ml-example/pixi.toml
 :linenos:
 ```
+
+where the definition of multiple platforms allows for solving the declared environments for all platforms while on other platforms
+
+```{literalinclude} code/ml-example/pixi.toml
+:linenos:
+:start-line: 0
+:end-line: 4
+:emphasize-lines: 4
+```
+
+the `cpu` feature defines `dependencies` and `tasks` that are accessible from the `cpu` environment
+
+```{literalinclude} code/ml-example/pixi.toml
+:lines: 12-19, 33-35
+```
