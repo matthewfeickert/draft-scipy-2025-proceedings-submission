@@ -1,5 +1,7 @@
 ## Pixi
 
+### Conceptual overview
+
 [Pixi](https://www.pixi.sh/) is a cross-platform package and environment manager that can handle complex development workflows [@pixi; @pixi-docs].
 Importantly, Pixi automatically and non-optionally will produce or update a lock file &mdash; a structured file that contains a full list of all environments defined with a complete list of all packages, as well as definition of each packages with digest information on the binary &mdash; for the software environments defined by the user whenever any actions mutate the environment.
 Pixi is written in Rust, and leverages the language's speed and technologies to solve environments fast.
@@ -21,3 +23,6 @@ Pixi will first solve all conda package requirements for the target environment,
 This ensures allows for fully reproducible solves and for the two package ecosystems to compliment each other rather than potentially cause conflicts.
 1. **Efficient caching**: Pixi uses an extremely efficient global caching scheme.
 This means that the first time a package is installed on a machine with Pixi is the slowest is will ever be to install it for any future project on the machine while the cache is still active.
+
+Pixi users declaratively specify their project dependencies which are recorded in a Pixi manifest `pixi.toml` file (which for Python projects can optionally be embedded in a `pyproject.toml` `[pixi]` table) and automatically resolved in the `pixi.lock` lock file.
+This declarative nature allows for users to efficiently specify their project requirements while being guaranteed a static and reproducible environment from the lock file.
