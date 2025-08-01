@@ -148,3 +148,17 @@ System
 
 Pixi also allows for feature composition to efficiently create new environments.
 @pixi-ml-example-workspace's `gpu` and `inference` features are combined and resolved collectively to provide a new CUDA accelerated `inference` environment that does not affect the `gpu` environment.
+
+```{code} toml
+:filename: pixi.toml
+
+...
+
+[feature.inference.dependencies]
+matplotlib = ">=3.10.3,<4"
+
+[environments]
+...
+gpu = ["gpu"]
+inference = ["gpu", "inference"]
+```

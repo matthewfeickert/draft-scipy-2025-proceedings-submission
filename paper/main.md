@@ -19,5 +19,8 @@ abstract: |
 :::{include} pixi.md
 :::
 
+:::{include} summary.md
+:::
+
 :::{include} acknowledgements.md
 :::
