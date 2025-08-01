@@ -122,7 +122,7 @@ This is a powerful functionality as it allows for environment specification, res
 
 ```{code} console
 :label: conda-override-cuda-example
-:caption: Demonstration of using the `CONDA_OVERRIDE_CUDA` environmental variable on a system with no CUDA support to allow dependency resolution as if it supported CUDA 12.
+:caption: Demonstration of using the `CONDA_OVERRIDE_CUDA` environmental variable on a system with no CUDA support (an Apple silicon machine) to allow dependency resolution as if it supported CUDA 12.
 
 % pixi info
 System
