@@ -145,3 +145,6 @@ System
                    : __archspec=1=m2
 ...
 ```
+
+Pixi also allows for feature composition to efficiently create new environments.
+@pixi-ml-example-workspace's `gpu` and `inference` features are combined and resolved collectively to provide a new CUDA accelerated `inference` environment that does not affect the `gpu` environment.
