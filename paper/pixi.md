@@ -30,10 +30,12 @@ This declarative nature allows for users to efficiently specify their project re
 ### CUDA hardware accelerated environment creation
 
 Combining the features of modern CUDA `12` conda packages with Pixi's environment management, it is now possible to efficiently manage multiple software environments that can include both hardware accelerated and CPU environments.
-An example Pixi workspace is presented below
+An example Pixi workspace is presented in @pixi-ml-example-workspace
 
 ```{literalinclude} code/ml-example/pixi.toml
 :linenos:
+:label: pixi-ml-example-workspace
+:caption: Example of a multi-platform and multi-environment Pixi manifest with all required information and constraints to resolve and install CUDA accelerated conda packages.
 ```
 
 where the definition of multiple platforms allows for solving the declared environments for all platforms while on other platforms
@@ -47,6 +49,99 @@ where the definition of multiple platforms allows for solving the declared envir
 
 the `cpu` feature defines `dependencies` and `tasks` that are accessible from the `cpu` environment
 
-```{literalinclude} code/ml-example/pixi.toml
-:lines: 12-19, 33-35
+```{code} toml
+:filename: pixi.toml
+
+...
+
+[feature.cpu.dependencies]
+pytorch-cpu = ">=2.7.1,<3"
+torchvision = ">=0.22.0,<0.23"
+
+[feature.cpu.tasks.train-cpu]
+description = "Train MNIST on CPU"
+cmd = "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
+
+...
+
+[environments]
+cpu = ["cpu"]
+```
+
+The `gpu` feature does the same for the `gpu` environment, but it also importantly defines a [`system-requirements` table](https://pixi.sh/v0.50.2/workspace/system_requirements/) that define the system specifications needed to install and run a Pixi workspace's environments.
+
+
+```{code} toml
+:filename: pixi.toml
+
+...
+
+[feature.gpu.system-requirements]
+cuda = "12"
+
+[feature.gpu.target.linux-64.dependencies]
+pytorch-gpu = ">=2.7.1,<3"
+torchvision = ">=0.22.0,<0.23"
+
+[feature.gpu.tasks.train-gpu]
+description = "Train MNIST on GPU"
+cmd = "python src/torch_MNIST.py --epochs 14 --save-model --data-dir data"
+
+...
+
+[environments]
+...
+gpu = ["gpu"]
+```
+
+`system-requirements` build upon the concept of conda "[virtual packages](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-virtual.html)", allowing for the dependency resolver to enforce constraints declared by defining compatibility of the system with virtual packages, like `__cuda`.
+In the particular case of CUDA, the `system-requirements` table specifies the CUDA version the workspace expects the host system to support, as detected through the host system's NVIDIA driver API.
+While the `system-requirements` field values do not correspond to lower or upper bounds, specifying that the workspace is expected to work on systems that support CUDA 12
+
+```{code} toml
+:filename: pixi.toml
+
+...
+
+[feature.gpu.system-requirements]
+cuda = "12"
+
+...
+
+```
+
+ensures that packages depending on `__cuda >= 12` are resolved correctly.
+This effectively means that declaring the system requirement will cause the Pixi dependency resolver to find CUDA enabled packages that are compatible with CUDA 12, disallowing for incompatible package builds to be resolved.
+Once these package dependencies have been resolved and locked, this ensures that any system capable of meeting the system requirement will get working CUDA accelerated conda packages installed.
+
+Not all machines will have an NVIDIA GPU on them to allow for the system requirements to be resolved correctly.
+To allow for non-CUDA-supported-machines to still resolve Pixi workspace requirements, shell environment overrides exist through the `CONDA_OVERRIDE_CUDA` environmental variable.
+Setting `CONDA_OVERRIDE_CUDA=12` on a machine that doesn't meet the CUDA version requirements, will override the supported virtual packages and set a value of `__cuda=12` for the system.
+This can be clearly understood from setting the override and then querying the workspace summary with `pixi info`, as seen in @conda-override-cuda-example.
+This is a powerful functionality as it allows for environment specification, resolution, and locking for target platforms that users might not have access to, but can be assured are valid.
+
+```{code} console
+:label: conda-override-cuda-example
+:caption: Demonstration of using the `CONDA_OVERRIDE_CUDA` environmental variable on a system with no CUDA support to allow dependency resolution as if it supported CUDA 12.
+
+% pixi info
+System
+------------
+       Pixi version: 0.50.2
+           Platform: osx-arm64
+   Virtual packages: __unix=0=0
+                   : __osx=15.3.2=0
+                   : __archspec=1=m2
+...
+
+% CONDA_OVERRIDE_CUDA=12 pixi info
+System
+------------
+       Pixi version: 0.50.2
+           Platform: osx-arm64
+   Virtual packages: __unix=0=0
+                   : __osx=15.3.2=0
+                   : __cuda=12=0
+                   : __archspec=1=m2
+...
 ```
