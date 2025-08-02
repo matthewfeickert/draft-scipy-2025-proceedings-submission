@@ -19,6 +19,9 @@ abstract: |
 :::{include} pixi.md
 :::
 
+:::{include} linux-containers.md
+:::
+
 :::{include} summary.md
 :::
 
