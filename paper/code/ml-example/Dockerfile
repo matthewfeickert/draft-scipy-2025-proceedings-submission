@@ -3,6 +3,9 @@ ARG ENVIRONMENT="gpu"
 
 FROM ghcr.io/prefix-dev/pixi:noble AS build
 
+ARG CUDA_VERSION
+ARG ENVIRONMENT
+
 WORKDIR /app
 COPY . .
 ENV CONDA_OVERRIDE_CUDA=CUDA_VERSION
@@ -12,6 +15,8 @@ RUN echo "#!/bin/bash" > /app/entrypoint.sh && \
     echo 'exec "$@"' >> /app/entrypoint.sh
 
 FROM ghcr.io/prefix-dev/pixi:noble AS final
+
+ARG ENVIRONMENT
 
 WORKDIR /app
 COPY --from=build /app/.pixi/envs/ENVIRONMENT /app/.pixi/envs/ENVIRONMENT
