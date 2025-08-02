@@ -165,6 +165,16 @@ inference = ["gpu", "inference"]
 
 ### Locked environments
 
-Once the workspace has been defined, any Pixi operation on the workspace will result in all environments in the workspace having their dependencies resolved and then fully specified ("locked") at the digest ("hash") level in a single `pixi.lock` Pixi lock file.
+Once the workspace has been defined, any Pixi operation on the workspace will result in all environments in the workspace having their dependencies resolved and then fully specified ("locked") at the digest ("hash") level in a single `pixi.lock` Pixi lock file, as seen in @example-pixi-lockfile.
+The lock file is a YAML file that contains two definition groups: `environments` and `packages`.
+The `environments` group lists every environment in the workspace for every platform with a complete listing of all packages in the environment.
+The `packages` group lists a full definition of every package that appears in the `environments` lists, including the package's URL and digests (e.g. sha256, md5).
+These groups provide a full description of every package described in the Pixi workspace and its dependencies and constraints on other packages.
 Versioning the lock file along with the manifest file in a version control system allows for workspaces to be fully reproducible to the byte level indefinitely into the future, conditioned on the continued existence of the package indexes the workspace pulls from (e.g. conda-forge, PyPI, the nvidia conda channel).
 In the event that long term preservation and reproducibility are of importance, there are community projects [@pixi-pack] that allow for downloading all dependencies of a Pixi environment and generating a tar archive containing all of the packages, which can later be unpacked and installed.
+
+```{literalinclude} example.lock
+:filename: pixi.lock
+:label: example-pixi-lockfile
+:caption: Example structure of a `pixi.lock` Pixi lock file showing the definition of the environments as well as a full description of each package used in each environment.
+```
