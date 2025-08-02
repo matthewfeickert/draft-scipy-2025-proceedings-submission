@@ -12,3 +12,5 @@ With the CUDA v12 distributions on conda-forge, researches no longer need to hav
 They need only know the supported versions of CUDA by the NVIDIA drivers on their target machines.
 Researchers also no longer need to use multiple tools build bespoke workflows for constructing and maintaining lock files for multiple environments and platforms, while keeping environment definition files and lock files synced.
 Pixi provides a single tool and unified interface to achieve the same results faster while using high level abstractions &mdash; removing most of the work of software environment reproducibility from the user workflow.
+Having the full specification of the software environment including the CUDA dependencies also removes runtime failures due to missing, unspecified, or incompatible system-level requirements on remote compute resources.
+Most importantly, reducing cognitive overhead and the latency to reach a useable software environment reduces the time to insight for researchers, transferring the problems of scientific computing back into their domains of expertise.
