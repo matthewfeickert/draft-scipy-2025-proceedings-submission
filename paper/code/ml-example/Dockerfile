@@ -3,6 +3,7 @@ ARG ENVIRONMENT="gpu"
 
 FROM ghcr.io/prefix-dev/pixi:noble AS build
 
+# Redeclaring ARGS in a stage without a value inherits the global default
 ARG CUDA_VERSION
 ARG ENVIRONMENT
 
