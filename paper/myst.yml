@@ -46,6 +46,16 @@ project:
       severity: ignore
       keys:
         - pixi
+        - PyPI_website
+        - CUDA_install_guide
+        - conda-forge_github_io_issue_687
+        - anaconda-defaults-channel
+        - conda-recipe-cudatoolkit
+        - staged-recipes-pr-12882
+        - ucx-split-feedstock-pr-14
+        - pixi-docs
+        - pixi-pack
+        - Feickert_Reproducible_Machine_Learning
   exports:
     - id: pdf
       format: typst
