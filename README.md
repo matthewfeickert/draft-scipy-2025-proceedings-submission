@@ -18,11 +18,13 @@ For reference on MyST functionality and features reference the [MyST documentati
 
 - [x] May 2: Authors invited to submit full papers
 - [x] May 9: Webinar offered to authors
-- [ ] Jun 13: Deadline to submit first draft by authors
+- [x] Jun 13: Deadline to submit first draft by authors
   - Reviewers comment on papers to authors during this period.
   - Authors also respond to review comments with improvements to papers during this period.
-- [ ] Aug 15: Final author revision deadline
+- [ ] Aug 22: Final author revision deadline
   - Authors put down their pens.
+- [ ] Aug 30: Final reviewer decision deadline
+- [ ] Sept 6: Proceedings final sign-off by editors
 
 ## [General Information and Guidelines for Authors](https://github.com/scipy-conference/scipy_proceedings/blob/2025/README.md#general-information-and-guidelines-for-authors)
 
