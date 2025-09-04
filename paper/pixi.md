@@ -167,9 +167,7 @@ matplotlib = ">=3.10.3,<4"
 notebook = ">=7.4.5,<8"
 jupyterlab = ">=4.4.7,<5"
 
-[feature.lab.tasks.start]
-description = "Launch JupyterLab"
-cmd = "jupyter lab"
+...
 
 [environments]
 ...
