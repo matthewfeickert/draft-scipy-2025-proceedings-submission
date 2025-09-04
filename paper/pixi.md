@@ -22,7 +22,7 @@ This allows for users to solve and share environment to any collaborator with co
 Pixi will first solve all conda package requirements for the target environment, lock the environment, and then solve all the dependencies of the Python packages for the environment, determine if there are any overlaps with the existing conda environment, and the only install the missing Python dependencies.
 This ensures allows for fully reproducible solves and for the two package ecosystems to compliment each other rather than potentially cause conflicts.
 1. **Efficient caching**: Pixi uses an efficient global caching scheme.
-This means that the first time a package is installed on a machine with Pixi is the slowest is will ever be to install it for any future project on the machine while the cache is still active.
+This means that the first time a package is installed on a machine with Pixi is the slowest it will ever be to install the package for any future project on the machine while the cache is still active.
 
 Pixi users declaratively specify their project dependencies which are recorded in a Pixi manifest `pixi.toml` file (which for Python projects can optionally be embedded in a `pyproject.toml` `[pixi]` table) and automatically resolved in the `pixi.lock` lock file.
 This declarative nature allows for users to efficiently specify their project requirements while being guaranteed a static and reproducible environment from the lock file.
