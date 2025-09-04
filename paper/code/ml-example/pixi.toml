@@ -15,7 +15,7 @@ torchvision = ">=0.22.0,<0.23"
 
 [feature.cpu.tasks.train-cpu]
 description = "Train a PyTorch CNN on MNIST on CPU"
-cmd = "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
+cmd = "python ./src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
 
 [feature.gpu.system-requirements]
 cuda = "12"
@@ -30,7 +30,7 @@ torchvision = ">=0.22.0,<0.23"
 
 [feature.gpu.tasks.train-gpu]
 description = "Train a PyTorch CNN on MNIST on GPU"
-cmd = "python src/torch_MNIST.py --epochs 14 --save-model --data-dir data"
+cmd = "python ./src/torch_MNIST.py --epochs 14 --save-model --data-dir data"
 
 [feature.inference.dependencies]
 matplotlib = ">=3.10.3,<4"
