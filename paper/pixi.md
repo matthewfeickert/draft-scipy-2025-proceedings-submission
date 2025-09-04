@@ -12,16 +12,16 @@ Pixi addresses the concept of computational reproducibility by focusing on a set
 1. **Package management**: Pixi enables the user to install, update, and remove packages from these environments through the `pixi` command line.
 1. **Task management**: Pixi has a task runner system built-in, which allows for tasks with custom logic and dependencies on other tasks to be created.
 
-combined with robust behaviors
+These features become powerful when combined with robust behaviors
 
 1. **Automatic lock files**: Any changes to a Pixi workspace that can mutate the environments defined in it will automatically and non-optionally result in the Pixi lock file for the workspace being updated.
-This ensures that any and every state of a Pixi project is trivially computationally reproducible.
+This ensures that any state of a Pixi project is trivially computationally reproducible.
 1. **Solving environments for other platforms**: Pixi allows the user to solve environment for platforms other than the current user machine's.
 This allows for users to solve and share environment to any collaborator with confidence that all environments will work with no additional setup.
 1. **Pairity of conda and Python packages**: Pixi allows for conda packages and Python packages to be used together seamlessly, and is unique in its ability to handle overlap in dependencies between them.
 Pixi will first solve all conda package requirements for the target environment, lock the environment, and then solve all the dependencies of the Python packages for the environment, determine if there are any overlaps with the existing conda environment, and the only install the missing Python dependencies.
 This ensures allows for fully reproducible solves and for the two package ecosystems to compliment each other rather than potentially cause conflicts.
-1. **Efficient caching**: Pixi uses an extremely efficient global caching scheme.
+1. **Efficient caching**: Pixi uses an efficient global caching scheme.
 This means that the first time a package is installed on a machine with Pixi is the slowest is will ever be to install it for any future project on the machine while the cache is still active.
 
 Pixi users declaratively specify their project dependencies which are recorded in a Pixi manifest `pixi.toml` file (which for Python projects can optionally be embedded in a `pyproject.toml` `[pixi]` table) and automatically resolved in the `pixi.lock` lock file.
