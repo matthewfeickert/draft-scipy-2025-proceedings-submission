@@ -22,7 +22,7 @@ This allows for users to solve and share environment to any collaborator with co
 Pixi will first solve all conda package requirements for the target environment, lock the environment, and then solve all the dependencies of the Python packages for the environment, determine if there are any overlaps with the existing conda environment, and the only install the missing Python dependencies.
 This ensures allows for fully reproducible solves and for the two package ecosystems to compliment each other rather than potentially cause conflicts.
 1. **Efficient caching**: Pixi uses an efficient global cache shared between all Pixi projects and globally installed tools on a machine.
-The first time Pixi installs a package it will download the files to the global cache and link the files into the environment, when it has to reinstall the same package in a different environment it will be linked from the same cache, making sure the downloading and diskspace is used as efficient as possible. 
+The first time Pixi installs a package it will download the files to the global cache and link the files into the environment, when it has to reinstall the same package in a different environment it will be linked from the same cache, making sure the downloading and diskspace is used as efficient as possible.
 
 Pixi users declaratively specify their project dependencies which are recorded in a Pixi manifest `pixi.toml` file (which for Python projects can optionally be embedded in a `pyproject.toml` `[pixi]` table) and automatically resolved in the `pixi.lock` lock file.
 This declarative nature allows for users to efficiently specify their project requirements while being guaranteed a static and reproducible environment from the lock file.
@@ -59,7 +59,7 @@ pytorch-cpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
 [feature.cpu.tasks.train-cpu]
-description = "Train MNIST on CPU"
+description = "Train a PyTorch CNN on MNIST on CPU"
 cmd = "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
 
 ...
@@ -83,8 +83,12 @@ cuda = "12"
 pytorch-gpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
+[feature.gpu.target.win-64.dependencies]
+pytorch-gpu = ">=2.7.1,<3"
+torchvision = ">=0.22.0,<0.23"
+
 [feature.gpu.tasks.train-gpu]
-description = "Train MNIST on GPU"
+description = "Train a PyTorch CNN on MNIST on GPU"
 cmd = "python src/torch_MNIST.py --epochs 14 --save-model --data-dir data"
 
 ...
@@ -127,7 +131,7 @@ This is a powerful functionality as it allows for environment specification, res
 % pixi info
 System
 ------------
-       Pixi version: 0.50.2
+       Pixi version: 0.54.1
            Platform: osx-arm64
    Virtual packages: __unix=0=0
                    : __osx=15.3.2=0
@@ -137,7 +141,7 @@ System
 % CONDA_OVERRIDE_CUDA=12 pixi info
 System
 ------------
-       Pixi version: 0.50.2
+       Pixi version: 0.54.1
            Platform: osx-arm64
    Virtual packages: __unix=0=0
                    : __osx=15.3.2=0
