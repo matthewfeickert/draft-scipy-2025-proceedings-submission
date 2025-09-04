@@ -35,7 +35,16 @@ cmd = "python src/torch_MNIST.py --epochs 14 --save-model --data-dir data"
 [feature.inference.dependencies]
 matplotlib = ">=3.10.3,<4"
 
+[feature.lab.dependencies]
+notebook = ">=7.4.5,<8"
+jupyterlab = ">=4.4.7,<5"
+
+[feature.lab.tasks.start]
+description = "Launch JupyterLab"
+cmd = "jupyter lab"
+
 [environments]
 cpu = ["cpu"]
 gpu = ["gpu"]
 inference = ["gpu", "inference"]
+lab = ["gpu", "inference", "lab"]
