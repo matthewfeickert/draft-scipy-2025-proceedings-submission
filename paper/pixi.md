@@ -153,6 +153,7 @@ System
 
 Pixi also allows for feature composition to efficiently create new environments.
 @pixi-ml-example-workspace's `gpu` and `inference` features are combined and resolved collectively to provide a new CUDA accelerated `inference` environment that does not affect the `gpu` environment.
+The same applies for the `lab` feature and environment, which additionally provides JupyterLab for interactive programming with notebooks.
 
 ```{code} toml
 :filename: pixi.toml
@@ -162,13 +163,23 @@ Pixi also allows for feature composition to efficiently create new environments.
 [feature.inference.dependencies]
 matplotlib = ">=3.10.3,<4"
 
-...
+[feature.lab.dependencies]
+notebook = ">=7.4.5,<8"
+jupyterlab = ">=4.4.7,<5"
+
+[feature.lab.tasks.start]
+description = "Launch JupyterLab"
+cmd = "jupyter lab"
 
 [environments]
 ...
 gpu = ["gpu"]
 inference = ["gpu", "inference"]
+lab = ["gpu", "inference", "lab"]
 ```
+
+Composing multiple environments from Pixi features allows for separating conceptual steps of scientific analysis into bespoke software environments that contain only the necessary dependencies.
+This allows for each step's environment to be better defined, potentially with radically different or conflicting dependencies from other steps, and for clean separation between interactive and non-interactive ("batch") computing models.
 
 ### Locked environments
 
