@@ -161,6 +161,8 @@ Pixi also allows for feature composition to efficiently create new environments.
 [feature.inference.dependencies]
 matplotlib = ">=3.10.3,<4"
 
+...
+
 [environments]
 ...
 gpu = ["gpu"]
