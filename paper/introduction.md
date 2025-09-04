@@ -21,4 +21,5 @@ Reproducible environments need to be machine agnostic in that for a specified co
 
 Software the involves hardware acceleration on computing resources like GPUs requires additional information to be provided for full computational reproducibility.
 In addition to the computer platform, information about the hardware acceleration device, its supported drivers, and compatible hardware accelerated versions of the software in the environment (GPU enabled builds) are required.
-Traditionally this has been very difficult to do, but multiple recent technological advancements (made possible by social agreements and collaborations) in the scientific open source world now provide solutions to these problems.
+While this information is straightforward to collect, traditionally this has been difficult to make use of in practice given software access restrictions and the lack of declarative human interfaces for defining relationships between system-level drivers and user software.
+Multiple recent technological advancements (made possible by social agreements and collaborations) in the scientific open source world now provide solutions to these problems.

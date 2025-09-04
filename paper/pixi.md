@@ -12,17 +12,18 @@ Pixi addresses the concept of computational reproducibility by focusing on a set
 1. **Package management**: Pixi enables the user to install, update, and remove packages from these environments through the `pixi` command line.
 1. **Task management**: Pixi has a task runner system built-in, which allows for tasks with custom logic and dependencies on other tasks to be created.
 
-combined with robust behaviors
+These features become powerful when combined with robust behaviors
 
 1. **Automatic lock files**: Any changes to a Pixi workspace that can mutate the environments defined in it will automatically and non-optionally result in the Pixi lock file for the workspace being updated.
-This ensures that any and every state of a Pixi project is trivially computationally reproducible.
+This ensures that any state of a Pixi project is trivially computationally reproducible.
 1. **Solving environments for other platforms**: Pixi allows the user to solve environment for platforms other than the current user machine's.
 This allows for users to solve and share environment to any collaborator with confidence that all environments will work with no additional setup.
 1. **Pairity of conda and Python packages**: Pixi allows for conda packages and Python packages to be used together seamlessly, and is unique in its ability to handle overlap in dependencies between them.
 Pixi will first solve all conda package requirements for the target environment, lock the environment, and then solve all the dependencies of the Python packages for the environment, determine if there are any overlaps with the existing conda environment, and the only install the missing Python dependencies.
 This ensures allows for fully reproducible solves and for the two package ecosystems to compliment each other rather than potentially cause conflicts.
-1. **Efficient caching**: Pixi uses an extremely efficient global caching scheme.
-This means that the first time a package is installed on a machine with Pixi is the slowest is will ever be to install it for any future project on the machine while the cache is still active.
+1. **Efficient caching**: Pixi uses an efficient global cache shared between all Pixi projects and globally installed tools on a machine.
+The first time Pixi installs a package it will download the files to the global cache and link the files into the environment.
+When Pixi has to reinstall the same package in a different environment, the package will be linked from the same cache, making sure internet bandwidth for downloads and disk space is used as efficiently as possible.
 
 Pixi users declaratively specify their project dependencies which are recorded in a Pixi manifest `pixi.toml` file (which for Python projects can optionally be embedded in a `pyproject.toml` `[pixi]` table) and automatically resolved in the `pixi.lock` lock file.
 This declarative nature allows for users to efficiently specify their project requirements while being guaranteed a static and reproducible environment from the lock file.
@@ -59,7 +60,7 @@ pytorch-cpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
 [feature.cpu.tasks.train-cpu]
-description = "Train MNIST on CPU"
+description = "Train a PyTorch CNN on MNIST on CPU"
 cmd = "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
 
 ...
@@ -83,8 +84,12 @@ cuda = "12"
 pytorch-gpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
+[feature.gpu.target.win-64.dependencies]
+pytorch-gpu = ">=2.7.1,<3"
+torchvision = ">=0.22.0,<0.23"
+
 [feature.gpu.tasks.train-gpu]
-description = "Train MNIST on GPU"
+description = "Train a PyTorch CNN on MNIST on GPU"
 cmd = "python src/torch_MNIST.py --epochs 14 --save-model --data-dir data"
 
 ...
@@ -127,7 +132,7 @@ This is a powerful functionality as it allows for environment specification, res
 % pixi info
 System
 ------------
-       Pixi version: 0.50.2
+       Pixi version: 0.54.1
            Platform: osx-arm64
    Virtual packages: __unix=0=0
                    : __osx=15.3.2=0
@@ -137,7 +142,7 @@ System
 % CONDA_OVERRIDE_CUDA=12 pixi info
 System
 ------------
-       Pixi version: 0.50.2
+       Pixi version: 0.54.1
            Platform: osx-arm64
    Virtual packages: __unix=0=0
                    : __osx=15.3.2=0
@@ -148,6 +153,7 @@ System
 
 Pixi also allows for feature composition to efficiently create new environments.
 @pixi-ml-example-workspace's `gpu` and `inference` features are combined and resolved collectively to provide a new CUDA accelerated `inference` environment that does not affect the `gpu` environment.
+The same applies for the `lab` feature and environment, which additionally provides JupyterLab for interactive programming with notebooks.
 
 ```{code} toml
 :filename: pixi.toml
@@ -157,11 +163,23 @@ Pixi also allows for feature composition to efficiently create new environments.
 [feature.inference.dependencies]
 matplotlib = ">=3.10.3,<4"
 
+[feature.lab.dependencies]
+notebook = ">=7.4.5,<8"
+jupyterlab = ">=4.4.7,<5"
+
+[feature.lab.tasks.start]
+description = "Launch JupyterLab"
+cmd = "jupyter lab"
+
 [environments]
 ...
 gpu = ["gpu"]
 inference = ["gpu", "inference"]
+lab = ["gpu", "inference", "lab"]
 ```
+
+Composing multiple environments from Pixi features allows for separating conceptual steps of scientific analysis into bespoke software environments that contain only the necessary dependencies.
+This allows for each step's environment to be better defined, potentially with radically different or conflicting dependencies from other steps, and for clean separation between interactive and non-interactive ("batch") computing models.
 
 ### Locked environments
 
