@@ -7,14 +7,14 @@ version = "0.1.0"
 [tasks]
 
 [dependencies]
-python = ">=3.13.5,<3.14"
+python = ">=3.13.7,<3.14"
 
 [feature.cpu.dependencies]
 pytorch-cpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
 [feature.cpu.tasks.train-cpu]
-description = "Train MNIST on CPU"
+description = "Train a PyTorch CNN on MNIST on CPU"
 cmd = "python src/torch_MNIST.py --epochs 2 --save-model --data-dir data"
 
 [feature.gpu.system-requirements]
@@ -24,8 +24,12 @@ cuda = "12"
 pytorch-gpu = ">=2.7.1,<3"
 torchvision = ">=0.22.0,<0.23"
 
+[feature.gpu.target.win-64.dependencies]
+pytorch-gpu = ">=2.7.1,<3"
+torchvision = ">=0.22.0,<0.23"
+
 [feature.gpu.tasks.train-gpu]
-description = "Train MNIST on GPU"
+description = "Train a PyTorch CNN on MNIST on GPU"
 cmd = "python src/torch_MNIST.py --epochs 14 --save-model --data-dir data"
 
 [feature.inference.dependencies]
