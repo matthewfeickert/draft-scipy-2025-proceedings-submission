@@ -62,3 +62,6 @@ project:
       template: https://github.com/curvenote-templates/scipy.git
       article: main.md
       output: full_text.pdf
+  # Include only the document with includes to avoid having inputs shown as "supporting documents"
+  toc:
+    - file: main.md
